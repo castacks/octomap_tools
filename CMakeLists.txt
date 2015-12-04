@@ -46,12 +46,12 @@ endif ()
 
 
 catkin_package(
-  INCLUDE_DIRS include
+#  INCLUDE_DIRS include
   CATKIN_DEPENDS tf
   DEPENDS octomap OpenMP
 )
 
-include_directories(include
+include_directories(#include
   ${catkin_INCLUDE_DIRS}
 )
 
