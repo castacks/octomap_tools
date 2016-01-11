@@ -37,7 +37,7 @@ main (int argc, char** argv)
   }
 
   // insert scan (only xyz considered, no colors)
-  tree.insertScan(octomap_cloud, sensor_origin, frame_origin);
+  tree.insertPointCloud(octomap_cloud, sensor_origin, frame_origin);
 
 //  // insert colors
 //  Eigen::Matrix4f Pose = Eigen::Matrix4f::Identity();
