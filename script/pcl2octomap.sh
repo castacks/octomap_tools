@@ -1,6 +1,14 @@
 #!/bin/bash
 
 echo "Begin to convert PCD to Octomap"
+
+#Step 0:
+#   You may want to downsample the pointcloud first. To do this simply
+
+echo "Step 0: Cloud downsample"
+rosrun octomap_tools cloud_downsample in_cloud.pcd 0.05 new_cloud.pcd
+pcl_viewer -ax 1 new_cloud.pcd
+
 #Step 1: 
 #   The coordinate of Ji's PCD file is: Y upward, Z forward, X left
 #   Our global map coordinate is: X forward, Z downward, Y right

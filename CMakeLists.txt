@@ -64,6 +64,9 @@ target_link_libraries(cloud_passthrough ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES}
 add_executable(cloud2octomap src/cloud2octomap.cpp)
 target_link_libraries(cloud2octomap ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES} ${DYNAMICEDT3D_LIBRARIES})
 
+add_executable(cloud_downsample src/cloud_downsample.cpp)
+target_link_libraries(cloud_downsample ${catkin_LIBRARIES} )
+
 
 # -----------------------------------------------
 # BUILD SUMARY
