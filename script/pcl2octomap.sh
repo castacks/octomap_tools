@@ -35,4 +35,8 @@ rosrun octomap_tools cloud2octomap crop_cloud.pcd 0.05 crop_cloud.bt
 octovis crop_cloud.bt
 
 
+#Step 4:
+echo "Step 4: Merge multiple pointclouds into octomap:"
+rosrun octomap_tools clouds2octomap ./base.pcd 0.05 ./octomap.bt transforms.csv ./
+
 echo "Convertion is completed!"

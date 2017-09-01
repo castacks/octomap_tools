@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <cstdlib>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/common/transforms.h>
@@ -39,25 +42,9 @@ main (int argc, char** argv)
   // insert scan (only xyz considered, no colors)
   tree.insertPointCloud(octomap_cloud, sensor_origin, frame_origin);
 
-//  // insert colors
-//  Eigen::Matrix4f Pose = Eigen::Matrix4f::Identity();
-//  pcl::PointCloud<pcl::PointXYZ> cloud_tf;
-//  pcl::transformPointCloud(*cloud, cloud_tf, Pose);
-//  for (unsigned int pt_idx = 0; pt_idx < cloud_tf.points.size(); ++pt_idx)
-//  {
-//    const PointT& p = cloud_tf.points[pt_idx];
-//    if (!std::isnan(p.z))
-//    {
-//      octomap::point3d endpoint(p.x, p.y, p.z);
-//      octomap::ColorOcTreeNode* n = tree.search(endpoint);
-//      //if (n) n->setColor(p.r, p.g, p.b);
-//    }
-//  }
-
   tree.updateInnerOccupancy();
 
   bool result;
-  //result = tree.write(argv[3]); //.ot
   result = tree.writeBinary(argv[3]); //.bt
   if (result)
 	  std::cout << "Point cloud to octomap conversion is completed!" << std::endl;
