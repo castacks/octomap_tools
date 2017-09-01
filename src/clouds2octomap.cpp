@@ -82,6 +82,7 @@ int main (int argc, char** argv) {
     char* octomap_file_name;
     char* tf_file_name;
     char* insert_clouds_path;
+    char* use_raw_cloud;
     std::map<std::string, std::vector<double> > transforms;
     std::vector<PointCloud> insert_clouds;
     std::vector<std::string> insert_cloud_names;
@@ -117,6 +118,7 @@ int main (int argc, char** argv) {
     }
 
     // Create octree
+    use_raw_cloud = argv[5];
     std::cout << "4. Adding pointclouds:       " << std::endl;
     octomap::ColorOcTree tree(resolution);
     octomap::point3d sensor_origin(0.0, 0.0, 0.0);
@@ -140,9 +142,13 @@ int main (int argc, char** argv) {
         pcl::transformPointCloud(insert_clouds[i], insert_cloud_transformed,T);
         octomap::pose6d frame_origin(octomath::Vector3(translation[0], translation[1], translation[2]),
                                      octomath::Quaternion(quaternion.w(), quaternion.x(), quaternion.y(), quaternion.z()));
-        insertCloud(tree, insert_cloud_transformed, sensor_origin, frame_origin);
-//        insertCloud(tree, insert_clouds[i], sensor_origin, frame_origin);
-        std::cout << "   Added insert cloud " << i+1 << std::endl;
+        if(std::strcmp(use_raw_cloud, "true") != 0) {
+            insertCloud(tree, insert_cloud_transformed, sensor_origin, frame_origin);
+            std::cout << "   Added insert cloud (transformed) " << i+1 << std::endl;
+        } else {
+            insertCloud(tree, insert_clouds[i], sensor_origin, frame_origin);
+            std::cout << "   Added insert cloud (raw) " << i+1 << std::endl;
+        }
     }
 
     tree.updateInnerOccupancy();

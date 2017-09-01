@@ -36,7 +36,11 @@ octovis crop_cloud.bt
 
 
 #Step 4:
+# Merge multiple pointclouds into one octomap. 
+# rosrun octomap_tools clouds2octomap [resolution] [path of generated bt file] [path of transformation information csv file] [path to all point clouds] [true = pcd in body frame, false = pcd in global frame]
+# transforms.csv should follow the format:
+# [pcd file name], t(0), t(1), t(2), t(3), t(4), t(5), t(6), t(7), t(8), t(9), t(10), t(11), t(12), t(13), t(14), t(15), 
 echo "Step 4: Merge multiple pointclouds into octomap:"
-rosrun octomap_tools clouds2octomap ./base.pcd 0.05 ./octomap.bt transforms.csv ./
+rosrun octomap_tools clouds2octomap 0.05 ./octomap.bt ./transforms.csv ./ true
 
 echo "Convertion is completed!"
