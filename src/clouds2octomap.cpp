@@ -106,9 +106,10 @@ int main (int argc, char** argv) {
     }
     for(size_t i=0; i<num_insert_clouds; i++) {
         std::string pcd_name = insert_clouds_path +
-                               std::string("_") +
+//                               std::string("_") +
                                insert_cloud_names[i] +
-                               std::string("_reg.pcd");
+//                               std::string("_reg.pcd");
+                                std::string(".pcd");
 
         PointCloud insert_cloud;
         readPCD(pcd_name.c_str(), insert_cloud, resolution);
